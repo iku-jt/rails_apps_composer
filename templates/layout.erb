@@ -20,7 +20,11 @@ Rails.application.config.generators do |g|
 end
 RUBY
 
-@recipes = <%= resolve_recipes.map(&:key).inspect %>
+if ENV['RECIPES'].blank?
+  @recipes = <%= resolve_recipes.map(&:key).inspect %>
+else
+  @recipes = ENV['RECIPES'].split(',')
+end
 
 <%= render "helpers" %>
 
