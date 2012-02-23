@@ -49,6 +49,10 @@ end
     guard 'livereload', '>= 0.3.0'
   end
 
+  if config['spork']
+    guard 'spork'
+  end
+
   if recipes.include? 'rspec'
     guard 'rspec', '>= 0.4.3'
   end
@@ -85,3 +89,6 @@ config:
   - livereload:
       type: boolean
       prompt: Would you like to enable the LiveReload guard?
+  - spork:
+      type: boolean
+      prompt: Would you like to use Guard with Spork?
