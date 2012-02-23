@@ -2,9 +2,9 @@ if config['spork']
   gem 'spork', :group => :test
 
   after_bundler do
-    if recipes?('rspec')
+    if recipe?('rspec')
       run 'spork rspec --bootstrap'
-    elsif recipes?('cucumber')
+    elsif recipe?('cucumber')
       run 'spork cucumber --bootstrap'
     else
       # Test:Unit assumed
