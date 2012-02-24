@@ -26,13 +26,13 @@ else
   @recipes = ENV['RECIPES'].split(',')
 end
 
-if ENV['OPTIONS'].blank?
-  @options = []
+if ENV['FEATURES'].blank?
+  @features = []
 else
-  @options = ENV['OPTIONS'].split(',')
+  @features = ENV['FEATURES'].split(',')
 end
 
-@wizard = @options.include?('with_wizard')
+@wizard = @features.include?('with_wizard')
 
 <%= render "helpers" %>
 

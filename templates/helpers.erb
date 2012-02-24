@@ -1,6 +1,6 @@
 def recipes; @recipes end
 def recipe?(name); @recipes.include?(name) end
-def has_option?(option); @options.include?(option) end
+def has_feature?(feature); @features.include?(feature) end
 
 def say_custom(tag, text); say "\033[1m\033[36m" + tag.to_s.rjust(10) + "\033[0m" + "  #{text}" end
 def say_recipe(name); say "\033[1m\033[36m" + "recipe".rjust(10) + "\033[0m" + "  Running #{name} recipe..." end
