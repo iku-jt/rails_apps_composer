@@ -26,11 +26,13 @@ else
   @recipes = ENV['RECIPES'].split(',')
 end
 
-if ENV['DEFAULTS'].blank?
+if ENV['OPTIONS'].blank?
   @defaults = []
 else
-  @defaults = ENV['DEFAULTS'].split(',')
+  @defaults = ENV['OPTIONS'].split(',')
 end
+
+@wizard = default?('with_wizard')
 
 <%= render "helpers" %>
 
