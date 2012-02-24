@@ -20,7 +20,7 @@ module RailsWizard
       result = []
       result << "config = #{values.inspect}"
       @questions.each_pair do |key, question|
-        result << "config['#{key}'] = @wizard ? ( #{question.compile} unless config.key?('#{key}') ) : default?('#{key}')"
+        result << "config['#{key}'] = @wizard ? ( #{question.compile} unless config.key?('#{key}') ) : has_option?('#{key}')"
       end
       result.join("\n")
     end

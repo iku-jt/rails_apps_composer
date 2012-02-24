@@ -27,12 +27,12 @@ else
 end
 
 if ENV['OPTIONS'].blank?
-  @defaults = []
+  @options = []
 else
-  @defaults = ENV['OPTIONS'].split(',')
+  @options = ENV['OPTIONS'].split(',')
 end
 
-@wizard = default?('with_wizard')
+@wizard = @options.include?('with_wizard')
 
 <%= render "helpers" %>
 
