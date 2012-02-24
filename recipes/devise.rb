@@ -3,6 +3,7 @@
 
 if config['devise']
   gem 'devise', '>= 2.0.4'
+  gem 'devise_invitable' if config['devise_invitable']
 else
   recipes.delete('devise')
 end
@@ -14,6 +15,9 @@ if config['devise']
     
     # Run the Devise generator
     generate 'devise:install'
+
+    # Run the Devise Invitable generator
+    generate 'devise_invitable:install' if config['devise_invitable']
 
     if recipes.include? 'mongo_mapper'
       gem 'mm-devise'
@@ -77,3 +81,6 @@ config:
   - devise:
       type: boolean
       prompt: Would you like to use Devise for authentication?
+  - devise_invitable:
+      type: boolean
+      prompt: Would you like to use Devise Invitable for send invitations by email?
