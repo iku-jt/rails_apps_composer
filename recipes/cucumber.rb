@@ -42,13 +42,15 @@ if config['cucumber']
       end
     end
   end
+else
+  recipes.delete('cucumber')
 end
 
 __END__
 
 name: Cucumber
 description: "Use Cucumber for BDD (with Capybara)."
-author: RailsApps
+author: iku-jt
 
 exclusive: acceptance_testing 
 category: testing

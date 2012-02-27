@@ -31,6 +31,21 @@ if config['show_for']
   end
 end
 
+if config['simple_form']
+  gem 'simple_form'
+  after_bundler do
+    generate 'simple_form:install' + (recipe?('twitter_bootstrap') ? ' --bootstrap' : '')
+  end
+end
+
+if config['unicorn']
+  gem 'unicorn', group: :production
+end
+
+if config['rmagick']
+  gem 'rmagick'
+end
+
 
 
 __END__
@@ -58,3 +73,12 @@ config:
   - show_for:
       type: boolean
       prompt: Would you like to quickly show model info with ShowFor?
+  - simple_form:
+      type: boolean
+      prompt: Would you like to install SimpleForm?
+  - unicorn:
+      type: boolean
+      prompt: Would you like to use Unicorn?
+  - rmagick:
+      type: boolean
+      prompt: Would you like to install RMagick?
