@@ -1,5 +1,15 @@
 h1. CHANGELOG
 
+h2. 1.1.5 February 26, 2012
+
+* update 'action_mailer' recipe to configure test environment
+* update 'action_mailer' recipe to configure ActionMailer to send email using a GMail account
+* update 'devise' recipe with 'confirmable' and 'invitable' options (with a Cucumber scenario)
+* change prompt for 'guard' recipe
+* update 'seed_database' recipe to add 'rake db:test:prepare'
+* remove 'add_user_name' recipe (replaced by 'add_user' recipe)
+* update 'cucumber' recipe to run single features without adding "--require features" to the command line
+
 h2. 1.1.4 February 21, 2012
 
 * add a 'bundle update' after 'bundle install'

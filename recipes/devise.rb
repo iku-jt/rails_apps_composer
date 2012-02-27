@@ -1,23 +1,33 @@
 # Application template recipe for the rails_apps_composer. Check for a newer version here:
 # https://github.com/RailsApps/rails_apps_composer/blob/master/recipes/devise.rb
+# Based on original devise recipe, but multiple_choise changed to set of yes/no
+# questions to keep compatibility with default-features.
 
 if config['devise']
   gem 'devise', '>= 2.0.4'
-  gem 'devise_invitable' if config['devise_invitable']
+
+  recipes << 'devise_confirmable' if config['devise_confirmable']
+    
+  if config['devise_invitable']
+    gem 'devise_invitable', '>= 1.0.0'
+    recipes << 'devise_confirmable'
+    recipes << 'devise_invitable'
+  end
+
 else
   recipes.delete('devise')
+  say_wizard "Devise recipe skipped."
 end
 
-if config['devise']
+if recipes.include? 'devise'
   after_bundler do
-    
+
     say_wizard "Devise recipe running 'after bundler'"
-    
+
     # Run the Devise generator
     generate 'devise:install'
-
-    # Run the Devise Invitable generator
     generate 'devise_invitable:install' if config['devise_invitable']
+    # generate 'devise_invitable:install' if recipes.include? 'devise-invitable'
 
     if recipes.include? 'mongo_mapper'
       gem 'mm-devise'
@@ -36,7 +46,7 @@ if config['devise']
       # (see https://github.com/RailsApps/rails3-devise-rspec-cucumber/issues/3)
       gsub_file 'config/initializers/devise.rb', 'config.sign_out_via = :delete', 'config.sign_out_via = Rails.env.test? ? :get : :delete'
     end
-    
+
   end
 
   after_everything do
@@ -84,3 +94,6 @@ config:
   - devise_invitable:
       type: boolean
       prompt: Would you like to use Devise Invitable for send invitations by email?
+  - devise_confirmable:
+      type: boolean
+      prompt: Would you like to use Devise Confirmable?

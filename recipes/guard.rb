@@ -1,4 +1,18 @@
-if config['guard']
+case config['guard']
+  when 'no'
+    recipes.delete('guard')
+    say_wizard "Guard recipe skipped."
+  when 'standard'
+    # do nothing
+  when 'LiveReload'
+    recipes << 'guard-LiveReload'
+  else
+    recipes.delete('guard')
+    say_wizard "Guard recipe skipped."
+end
+
+
+if recipes.include? 'guard'
   gem 'guard', '>= 0.6.2', :group => :development
 
   prepend_file 'Gemfile' do <<-RUBY
@@ -44,8 +58,8 @@ end
   unless recipes.include? 'pow'
     guard 'rails', '>= 0.0.3'
   end
-
-  if config['livereload']
+  
+  if recipes.include? 'guard-LiveReload'
     guard 'livereload', '>= 0.3.0'
   end
 
@@ -84,11 +98,15 @@ tags: [dev]
 
 config:
   - guard:
-      type: boolean
+      type: multiple_choice
       prompt: Would you like to use Guard to automate your workflow?
+<<<<<<< HEAD
   - livereload:
       type: boolean
       prompt: Would you like to enable the LiveReload guard?
   - spork:
       type: boolean
       prompt: Would you like to use Guard with Spork?
+=======
+      choices: [["No", no], ["Guard default configuration", standard], ["Guard with LiveReload", LiveReload]]
+>>>>>>> c765570970d35dd7d36b358258b60ad82945fb9d
