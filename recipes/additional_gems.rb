@@ -46,6 +46,18 @@ if config['rmagick']
   gem 'rmagick'
 end
 
+if config['fabrication']
+  gem 'fabrication'
+end
+
+if config['cancan']
+  gem 'cancan'
+end
+
+if config['responders']
+  gem 'responders'
+end
+
 
 
 __END__
@@ -82,3 +94,12 @@ config:
   - rmagick:
       type: boolean
       prompt: Would you like to install RMagick?
+  - fabrication:
+      type: boolean
+      prompt: Would you like to install Fabrication?
+  - cancan:
+      type: boolean
+      prompt: Would you like to install CanCan?      
+  - responders:
+      type: boolean
+      prompt: Would you like to install Responders?
