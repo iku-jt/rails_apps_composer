@@ -58,7 +58,37 @@ if config['responders']
   gem 'responders'
 end
 
+if config['postgres'] and not recipe?('mongoid')
+  gem 'pg', '~> 0.13'
+end
 
+if config['pacecar']
+  gem 'pacecar'
+end
+
+if config['state_machine']
+  gem 'state_machine'
+end
+
+if config['fog']
+  gem 'fog'
+end
+
+if config['yajl_ruby']
+  gem 'yajl-ruby'
+end
+
+if config['newrelic_rpm']
+  gem 'newrelic_rpm'
+end
+
+if config['tddium']
+  gem 'tddium'
+end
+
+if config['factory_girl_rails']
+  gem 'factory_girl_rails'
+end
 
 __END__
 
@@ -103,3 +133,27 @@ config:
   - responders:
       type: boolean
       prompt: Would you like to install Responders?
+  - postgres:
+      type: boolean
+      prompt: Would you like to use PostgreSQL?
+  - pacecar:
+      type: boolean
+      prompt: Would you like to generate scope methods with Pacecar?
+  - state_machine:
+      type: boolean
+      prompt: Would you like to add AASM?
+  - fog:
+      type: boolean
+      prompt: Would you like to use Fog?
+  - yajl_ruby:
+      type: boolean
+      prompt: Would you like to use YAJL C Bindings for Ruby?
+  - newrelic_rpm:
+      type: boolean
+      prompt: Would you like to use New Relic Ruby Agent?
+  - tddium:
+      type: boolean
+      prompt: Would you like to use tddium?
+  - factory_girl_rails:
+      type: boolean
+      prompt: Would you like to use factory_girl_rails?
