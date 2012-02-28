@@ -1,15 +1,17 @@
-if connect['simplecov']
+if config['simplecov']
   gem 'simplecov', :require => false, :group => :test
-  simplecov <<-TEXT
+  after_bundler do
+    simplecov = <<-TEXT
   require 'simplecov'
   SimpleCov.start 'rails'
-  TEXT
-  if recipe?('rspec')
-    prepend_file "spec/spec_helper.rb", simplecov
-  elsif recipe?('cucumber')
-    prepend_file "features/support/env.rb", simplecov
-  else # Test:Unit assumed
-    prepend_file "test/test_helper.rb", simplecov
+    TEXT
+    if recipe?('rspec')
+      prepend_file "spec/spec_helper.rb", simplecov
+    elsif recipe?('cucumber')
+      prepend_file "features/support/env.rb", simplecov
+    else # Test:Unit assumed
+      prepend_file "test/test_helper.rb", simplecov
+    end
   end
 else
   recipes.delete('simplecov')

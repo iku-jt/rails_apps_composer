@@ -10,12 +10,14 @@ if config['sunspot']
 
   if config['sunspot_test']
     gem 'sunspot_test'
-    if recipe?('cucumber')
-      prepend_file "features/support/env.rb", "require 'sunspot_test/cucumber'"
-    elsif recipe?('rspec')
-      prepend_file "spec/spec_helper.rb", "require 'sunspot_test/rspec'"
-    else # Test:Unit assumed
-      prepend_file "test/test_helper.rb", "require 'sunspot_test/test_unit'"
+    after_bundler do
+      if recipe?('cucumber')
+        prepend_file "features/support/env.rb", "require 'sunspot_test/cucumber'"
+      elsif recipe?('rspec')
+        prepend_file "spec/spec_helper.rb", "require 'sunspot_test/rspec'"
+      else # Test:Unit assumed
+        prepend_file "test/test_helper.rb", "require 'sunspot_test/test_unit'"
+      end
     end
   end
 
